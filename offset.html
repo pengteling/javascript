@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>offset</title>
+  <style>
+    .grandfather{
+      width: 1000px;
+      height: 500px;
+      padding:100px;
+      background: #f0f;
+    }
+    .father{
+      /* position: relative; */
+      width: 500px;
+      height: 360px;
+      padding: 20px;
+      background: #0f0;
+    }
+    .son{
+      /* position: absolute;
+      left: 29px; */
+      width: 100px;
+      height: 100px;
+      padding: 20px;
+      border: 5px solid;
+      margin: 20px;
+      background: #00f;
+    }
+  </style>
+</head>
+<body>
+  <div class="grandfather">
+    <div class="father">
+      <div class="son"></div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+  var son = document.querySelector(".son");
+  //没有定位祖先元素时 计算到body 或者理解为html的边缘，包括body的margin   从自己的边框开始起（包含自己的margin）
+  console.log("offsetLeft:"+son.offsetLeft);
+  console.log("offsetTop:"+son.offsetTop);
+  //IE8 只支持 currentStyle 不支持 getComputedStyle
+  var style = son.currentStyle || getComputedStyle(son,null);
+  console.log(style.left); 
+  //最近的具有定位属性的祖先元素
+  console.log(son.offsetParent);
+  console.log(son.parentNode);
+
+  console.log("offsetWidth:"+son.offsetWidth); //计算的 content + padding + border  可视宽度 
+  console.log("offsetHeight:"+son.offsetHeight);
+
+  console.log("style.width:"+style.width); //仅是 content width
+  console.log("style.height:"+style.height);
+
+</script>
